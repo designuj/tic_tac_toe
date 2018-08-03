@@ -1,19 +1,22 @@
 import java.util.Scanner;
 
 public class Menu {
-    public static void mainMenu() {
+    public static void mainMenu(Board board) {
         try {
-            System.out.println("Hello geeky!");
-            Thread.sleep(2000);
-            System.out.println("It's time to play against Mr. Computer.");
-            Thread.sleep(2000);
-            System.out.println("Take a look at the Board.");
-            Thread.sleep(2000);
-            System.out.println("Hope you know the game :)");
-            Thread.sleep(2000);
-            System.out.println("Make a move in \'column,row\' or \'column, row\' style.");
-            Thread.sleep(2000);
-            System.out.println("Example input: \'1,2\' or \'1, 2\'.");
+            text("Hello geeky!");
+            Thread.sleep(1000);
+            text("It's time to play against Mr. Computer.");
+            Thread.sleep(1000);
+            text("Take a look at the Board.");
+            Thread.sleep(1000);
+            text(board.drawBoard());
+            text("Hope you know the game :)");
+            Thread.sleep(1000);
+            text("Make a move in \'column,row\' style.");
+            Thread.sleep(1000);
+            text("Example input: \'1,9\' (counting from 1 to 9!).");
+            Thread.sleep(1000);
+            text("Make first move:");
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -23,7 +26,7 @@ public class Menu {
         if (yourMove) {
             try {
                 Thread.sleep(2000);
-                System.out.println("What's your move?");
+                text("What's your move?");
 
             } catch (InterruptedException e) {
                 e.printStackTrace();
@@ -31,14 +34,21 @@ public class Menu {
         }
         else {
             try {
-                Thread.sleep(2000);
-                System.out.println("Computer is making a move...");
-                Thread.sleep(2000);
+                Thread.sleep(1000);
+                text("Computer is making a move...");
+                Thread.sleep(1000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
         }
     }
 
-    public void drawBoard(Game)
+    public String drawBoard(Game game) {
+        String board = "";
+        return "";
+    }
+
+    private static void text(String text) {
+        System.out.println(text);
+    }
 }
