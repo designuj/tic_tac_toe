@@ -36,7 +36,7 @@ public class Game {
         }
     }
 
-    private static String play(Menu menu, Board board, boolean playerMove, boolean endGame, boolean) {
+    private String play(Menu menu, Board board, boolean playerMove, boolean endGame) {
         if (!endGame) {
             if (playerMove) {
                 makePlayerMove();
@@ -44,8 +44,9 @@ public class Game {
                 makeComputerMove();
             }
         } else {
-            return "And the winner is..." + getWinner(board);
+            return "And the winner is...";
         }
+        return "";
     }
 
     private void makeComputerMove() {
