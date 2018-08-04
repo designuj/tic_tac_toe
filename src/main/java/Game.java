@@ -1,40 +1,18 @@
-import java.util.Scanner;
-
 public class Game {
+    private Menu menu;
+    private Board board;
 
-    public static final char COMPUTER = 'x';
-    public static final char PLAYER = 'o';
-
-    private String inputPattern = "[1-9]\\,[1-9]";
+    private boolean endGame;
 
     public Game() {
-        start();
+        menu = new Menu();
+        board = new Board();
+
+        play();
     }
 
-    private void start() {
-        Board board = new Board();
-        Menu.mainMenu(board);
-        while (finish()) {
-            play();
-        }
-    }
+    private static boolean play() {
 
-    public Board userMove(Board board) {
-        Scanner scanner = new Scanner(System.in);
-        String moveRead = scanner.nextLine();
-        while (moveRead.matches(inputPattern)) {
-            int column = moveRead.charAt(0)-1;
-            int row = moveRead.charAt(2)-1;
-        }
-
-        return board;
-    }
-
-    private static boolean finish() {
-        return false;
-    }
-
-    private static void play() {
-
+        return true;
     }
 }
