@@ -12,27 +12,23 @@ public class Board {
         }
     }
 
-    private char getChar(Board board) {
-
-    }
-
-    public String showBoard(Board board) {
-        return "            |             |\n" +
-                " " + String.valueOf(board[0][1]) + " | o | x  |  x | o | x  |  o | x | x\n" +
-                " o | o | x  |  o | x | o  |  o | o | x\n" +
-                " o | o | x  |  o | x | x  |  x | x | o\n" +
-                "            |             |\n" +
-                "---------------------------------------\n" +
-                "            |             |\n" +
-                " o | o | x  |  x | o | x  |  o | x | x\n" +
-                " o | o | x  |  o | x | o  |  o | o | x\n" +
-                " o | o | x  |  o | x | x  |  x | x | o\n" +
-                "            |             |\n" +
-                "---------------------------------------\n" +
-                "            |             |\n" +
-                " o | o | x  |  x | o | x  |  o | x | x\n" +
-                " o | o | x  |  o | x | o  |  o | o | x\n" +
-                " o | o | x  |  o | x | x  |  x | x | o\n" +
-                "            |             |";
+    public static String showBoard(Board board) {
+        return  "             |             |\n" +
+                "  o | o | x  |  x | o | x  |  o | x | x\n" +
+                "  o | o | x  |  o | x | o  |  o | o | x\n" +
+                "  o | o | x  |  o | x | x  |  x | x | o\n" +
+                "             |             |\n" +
+                "-----------------------------------------\n" +
+                "             |             |\n" +
+                "  o | o | x  |  x | o | x  |  o | x | x\n" +
+                "  o | o | x  |  o | x | o  |  o | o | x\n" +
+                "  o | o | x  |  o | x | x  |  x | x | o\n" +
+                "             |             |\n" +
+                " ----------------------------------------\n" +
+                "             |             |\n" +
+                "  o | o | x  |  x | o | x  |  o | x | x\n" +
+                "  o | o | x  |  o | x | o  |  o | o | x\n" +
+                "  o | o | x  |  o | x | x  |  x | x | o\n" +
+                "             |             |";
     }
 }
