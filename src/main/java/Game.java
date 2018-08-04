@@ -17,8 +17,6 @@ public class Game {
         while (finish()) {
             play();
         }
-
-
     }
 
     public Board userMove(Board board) {
