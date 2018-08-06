@@ -2,28 +2,40 @@ import java.util.Scanner;
 
 public class App {
     public static void main(String[] args) {
-        Board board = new Board();
+
+        Game game = new Game();
         Scanner scanner = new Scanner(System.in);
         char player = 'x';
 
-        while (!board.finishGame()) {
-            System.out.println(board);
-            System.out.println("Player '" + player + "' - make a move (input in one-digit-style):");
+        System.out.println("Welcome to my extented tic-tac-toe game.");
+        System.out.println("Boards input looks like this:\n");
+        System.out.println("  1 | 2 | 3\n ---|---|---\n  4 | 5 | 6\n ---|---|---\n  7 | 8 | 9\n");
+        System.out.println("And this is how main board looks like:\n");
 
-            board.move(player, scanner.nextInt()-1);
+        while (!game.finish()) {
+
+
+            System.out.println(game);
+            System.out.println("Player '" + player + "' move (one-digit-style input):");
+
+            int input = scanner.nextInt();
+            game.move(player, input-1);
 
             if (player == 'x') {
                 player = 'o';
             } else {
-                player = 'o';
+                player = 'x';
             }
+            System.out.println("Current board is " + (game.getCurrent()+1));
         }
 
-        System.out.println(board);
-        if (board.getWinner() == '·') {
-            System.out.println("It's draw!");
+        System.out.println(game);
+
+        if (game.getWinner() == '!') {
+            System.out.println("Draw!");
         } else {
-            System.out.println(board.getWinner() + " wins!");
+            System.out.println("Player '" + game.getWinner() + "' wins!");
         }
+        scanner.close();
     }
 }
