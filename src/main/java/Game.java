@@ -11,7 +11,7 @@ public class Game {
         }
     }
 
-    public void move(char player, int location) {
+    public void move(char player, int location) throws LocationNotAvailableException, FullBoardException {
         Board smallBoard = boardArray[current / 3][current % 3];
         smallBoard.move(player, location);
 
@@ -19,6 +19,11 @@ public class Game {
             boardArray[current / 3][current % 3] = new Board(smallBoard.getWinner());
             board.move(smallBoard.getWinner(), current);
         }
+
+        if (boardArray[location / 3][location % 3].finish()) {
+            throw new FullBoardException(location);
+        }
+
         current = location;
     }
 

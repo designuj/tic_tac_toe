@@ -1,3 +1,4 @@
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class App {
@@ -16,16 +17,28 @@ public class App {
 
 
             System.out.println(game);
-            System.out.println("Player '" + player + "' move (one-digit-style input):");
+            System.out.print("Player '" + player + "' move (one-digit-style input): ");
 
-            int input = scanner.nextInt();
-            game.move(player, input-1);
 
-            if (player == 'x') {
-                player = 'o';
-            } else {
-                player = 'x';
+
+            try {
+                int input = scanner.nextInt();
+                game.move(player, input-1);
+                if (player == 'x') {
+                    player = 'o';
+                } else {
+                    player = 'x';
+                }
+            } catch (LocationNotAvailableException e) {
+                System.out.println("Location is already taken. Choose more wisely.");
+            } catch (IllegalArgumentException e) {
+                System.out.println(e);
+            } catch (InputMismatchException e) {
+                System.out.println(e);
             }
+
+
+
             System.out.println("Current board is " + (game.getCurrent()+1));
         }
 

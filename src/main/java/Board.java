@@ -25,7 +25,19 @@ public class Board {
         return outBoard;
     }
 
-    public void move(char player,int location) {
+    public void move(char player,int location) throws LocationNotAvailableException {
+        if (player != 'x' && player != 'o') {
+            throw new IllegalArgumentException("Hmm looks like you are not a player.");
+        }
+
+        if (!(location >= 0 && location <= 8)) {
+            throw new IllegalArgumentException("Location should fit 1-9.");
+        }
+
+        if (board[location / 3][location % 3] != ' ') {
+            throw new LocationNotAvailableException(location);
+        }
+
         board[location / 3][location % 3] = player;
     }
 
