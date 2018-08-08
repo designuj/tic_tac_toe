@@ -35,8 +35,9 @@ public class App {
                 System.out.println(e);
             } catch (InputMismatchException e) {
                 System.out.println(e);
+            } catch (FullBoardException e) {
+                e.printStackTrace();
             }
-
 
 
             System.out.println("Current board is " + (game.getCurrent()+1));
