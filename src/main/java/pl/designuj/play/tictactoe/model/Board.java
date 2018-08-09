@@ -1,8 +1,6 @@
 package pl.designuj.play.tictactoe.model;
 
-import org.springframework.beans.factory.annotation.*;
-import org.springframework.context.annotation.*;
-import org.springframework.stereotype.*;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 

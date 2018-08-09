@@ -1,8 +1,8 @@
 package pl.designuj.play.tictactoe.services;
 
-import pl.designuj.play.tictactoe.model.*;
+import pl.designuj.play.tictactoe.model.Board;
 
-import java.util.*;
+import java.util.List;
 
 public interface BoardAPI {
     void refresh();

@@ -1,6 +1,5 @@
 package pl.designuj.play.tictactoe.services;
 
-import org.springframework.beans.factory.annotation.*;
 import org.springframework.stereotype.Service;
 import pl.designuj.play.tictactoe.model.Board;
 
