@@ -1,4 +1,4 @@
-package pl.designuj.play.tictactoe.service;
+package pl.designuj.play.tictactoe.services;
 
 import org.springframework.stereotype.Service;
 import pl.designuj.play.tictactoe.model.Board;
@@ -7,10 +7,17 @@ import java.util.List;
 
 @Service
 public class GameService implements GameAPI {
-    private BoardService boardService;
+    private final Integer BOARD_FIRST_INDEX = 1;
+    private final Integer BOARD_LAST_INDEX = 9;
+
+    private final BoardService boardService;
 
     public GameService(BoardService boardService) {
         this.boardService = boardService;
+    }
+
+    public BoardAPI getBoardService() {
+        return boardService;
     }
 
     @Override
@@ -32,7 +39,7 @@ public class GameService implements GameAPI {
 
     @Override
     public void makeMove(Integer location) {
-        if (location > 0 && location < 10)
+        if (location >= BOARD_FIRST_INDEX && location <= BOARD_LAST_INDEX)
         boardService.makeMove(location);
     }
 }

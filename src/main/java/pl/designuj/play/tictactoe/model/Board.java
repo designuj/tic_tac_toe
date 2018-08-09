@@ -1,30 +1,45 @@
 package pl.designuj.play.tictactoe.model;
 
-import org.springframework.stereotype.Repository;
+import org.springframework.beans.factory.annotation.*;
+import org.springframework.context.annotation.*;
+import org.springframework.stereotype.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
-@Repository
+@Component
 public class Board {
-    public static Integer BOARD_CAPACITY = 9;
-    public static final Character playerX = 'x';
-    public static final Character playerO = 'o';
 
-    private List<Character> boards = new ArrayList<>(BOARD_CAPACITY);
-    private Boolean boardFull;
+    private List<Character> charsInBoard;
+    private Boolean winBoard;
+    private Character player;
 
-    private void setBoardToWin(Character player) {
-        for (int i = 0; i < boards.size(); i++) {
-            boards.set(i, player);
-        }
+    public Board(List<Character> charsInBoard, Boolean winBoard, Character player) {
+        this.charsInBoard = charsInBoard;
+        this.winBoard = winBoard;
+        this.player = player;
     }
 
-    private Boolean isBoardFull(Integer location) {
-        return true;
+    public List<Character> getCharsInBoard() {
+        return charsInBoard;
     }
 
-    private List<Character> getBoards() {
-        return boards;
+    public void setCharsInBoard(List<Character> charsInBoard) {
+        this.charsInBoard = charsInBoard;
+    }
+
+    public Boolean getWinBoard() {
+        return winBoard;
+    }
+
+    public void setWinBoard(Boolean winBoard) {
+        this.winBoard = winBoard;
+    }
+
+    public Character getPlayer() {
+        return player;
+    }
+
+    public void setPlayer(Character player) {
+        this.player = player;
     }
 }

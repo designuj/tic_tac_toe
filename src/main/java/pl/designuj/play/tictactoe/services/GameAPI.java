@@ -1,4 +1,4 @@
-package pl.designuj.play.tictactoe.service;
+package pl.designuj.play.tictactoe.services;
 
 import pl.designuj.play.tictactoe.model.Board;
 
