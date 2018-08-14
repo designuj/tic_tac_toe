@@ -1,20 +1,18 @@
 package pl.designuj.play.tictactoe.model;
 
-import org.springframework.stereotype.Component;
+import org.springframework.beans.factory.annotation.*;
+import org.springframework.context.annotation.*;
+import org.springframework.stereotype.*;
 
 import java.util.List;
 
-@Component
 public class Board {
 
     private List<Character> charsInBoard;
     private Boolean winBoard;
     private Character player;
 
-    public Board(List<Character> charsInBoard, Boolean winBoard, Character player) {
-        this.charsInBoard = charsInBoard;
-        this.winBoard = winBoard;
-        this.player = player;
+    public Board() {
     }
 
     public List<Character> getCharsInBoard() {

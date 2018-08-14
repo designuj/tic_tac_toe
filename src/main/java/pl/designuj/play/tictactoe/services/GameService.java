@@ -1,7 +1,7 @@
 package pl.designuj.play.tictactoe.services;
 
 import org.springframework.stereotype.Service;
-import pl.designuj.play.tictactoe.model.Board;
+import pl.designuj.play.tictactoe.model.*;
 
 import java.util.List;
 
@@ -10,14 +10,10 @@ public class GameService implements GameAPI {
     private final Integer BOARD_FIRST_INDEX = 1;
     private final Integer BOARD_LAST_INDEX = 9;
 
-    private final BoardService boardService;
+    private BoardService boardService;
 
     public GameService(BoardService boardService) {
         this.boardService = boardService;
-    }
-
-    public BoardAPI getBoardService() {
-        return boardService;
     }
 
     @Override

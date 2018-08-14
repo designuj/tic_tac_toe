@@ -1,7 +1,8 @@
 package pl.designuj.play.tictactoe.services;
 
+import org.springframework.beans.factory.annotation.*;
 import org.springframework.stereotype.Service;
-import pl.designuj.play.tictactoe.model.Board;
+import pl.designuj.play.tictactoe.model.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,8 +13,8 @@ public class BoardService implements BoardAPI {
 
     private List<Board> boardsInGame;
 
-    public BoardService(List<Board> boardsInGame) {
-        this.boardsInGame = boardsInGame;
+    public BoardService() {
+        boardsInGame = new ArrayList<>(BOARD_CAPACITY);
     }
 
     @Override
@@ -32,7 +33,7 @@ public class BoardService implements BoardAPI {
     }
 
     @Override
-    public Character whoShouldMove() {
+    public Character whoShouldMakeMove() {
         return null;
     }
 
