@@ -1,6 +1,7 @@
 package pl.designuj.play.tictactoe.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.*;
 import org.springframework.stereotype.Controller;
 
 import org.springframework.web.bind.annotation.*;
@@ -10,11 +11,11 @@ import pl.designuj.play.tictactoe.services.*;
 
 import java.util.List;
 
-@Controller
+@RestController
 @RequestMapping("/game")
 public class GameController {
 
-    private final GameService gameService;
+    private GameService gameService;
 
     @Autowired
     public GameController(GameService gameService) {
@@ -22,28 +23,28 @@ public class GameController {
     }
 
     @PutMapping("/new")
-    public void createNewGame(@RequestBody Boolean confirm) {
+    public void createNewGame(@RequestParam Boolean confirm) {
+        System.out.println("New game request.");
         gameService.createNewGame(confirm);
-        System.out.println("heheszki");
     }
 
     @PutMapping("/move")
-    public void makeMove(@RequestBody Integer location) {
-        gameService.makeMove(location);
-        System.out.println("heheszki");
+    public void makeMove(@RequestParam Long location) {
+        System.out.println("Move request to location " + location + ".");
+        gameService.makeMove(location.intValue());
     }
 
     @GetMapping("/get")
     @ResponseBody
     public List<Board> getCurrentGame() {
-        System.out.println("heheszki");
+        System.out.println("Check game status request.");
         return gameService.getCurrentGame();
     }
 
     @GetMapping("/who")
     @ResponseBody
     public Character whoShouldMove() {
-        System.out.println("heheszki");
+        System.out.println("Check current player request.");
         return gameService.whoShouldMove();
     }
 }
