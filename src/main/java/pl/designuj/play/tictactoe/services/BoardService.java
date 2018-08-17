@@ -42,11 +42,11 @@ public class BoardService {
     }
 
     public void makeMove(Integer location) {
-        if (boardsInGame.get(currentBoard).getCharsInBoard().get(location) != ' ') {
+        if (boardsInGame.get(currentBoard).getCharsInBoard().get(location) == ' ') {
             boardsInGame.get(currentBoard).getCharsInBoard().set(location, currentPlayer);
+            switchUser();
+            switchBoard(location);
         }
-        switchUser();
-        switchBoard(location);
     }
 
     public void switchUser() {

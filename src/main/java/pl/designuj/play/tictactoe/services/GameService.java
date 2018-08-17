@@ -7,8 +7,8 @@ import java.util.List;
 
 @Service
 public class GameService implements GameAPI {
-    private final Integer BOARD_FIRST_INDEX = 1;
-    private final Integer BOARD_LAST_INDEX = 9;
+    private final Integer BOARD_FIRST_INDEX = 0;
+    private final Integer BOARD_LAST_INDEX = 8;
 
     private BoardService boardService;
 
