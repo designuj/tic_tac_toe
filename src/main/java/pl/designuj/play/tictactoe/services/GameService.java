@@ -19,13 +19,13 @@ public class GameService implements GameAPI {
     @Override
     public void createNewGame(Boolean confirm) {
         if (confirm) {
-            boardService.refresh();
+            boardService.refresh(' ');
         }
     }
 
     @Override
     public List<Board> getCurrentGame() {
-        return boardService.getGame();
+        return boardService.getBoardsInGame();
     }
 
     @Override

@@ -5,7 +5,7 @@ import pl.designuj.play.tictactoe.model.*;
 import java.util.List;
 
 public interface BoardAPI {
-    void refresh();
+    void refresh(Character player);
     Boolean isGameFinish();
     List<Board> getGame();
     Character whoShouldMakeMove();

@@ -1,9 +1,6 @@
 package pl.designuj.play.tictactoe.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.*;
-import org.springframework.stereotype.Controller;
-
 import org.springframework.web.bind.annotation.*;
 
 import pl.designuj.play.tictactoe.model.Board;
@@ -29,9 +26,9 @@ public class GameController {
     }
 
     @PutMapping("/move")
-    public void makeMove(@RequestParam Long location) {
+    public void makeMove(@RequestParam Integer location) {
         System.out.println("Move request to location " + location + ".");
-        gameService.makeMove(location.intValue());
+        gameService.makeMove(location-1);
     }
 
     @GetMapping("/get")
