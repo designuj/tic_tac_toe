@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import pl.designuj.play.tictactoe.model.Board;
+import pl.designuj.play.tictactoe.model.Move;
 import pl.designuj.play.tictactoe.services.GameService;
 
 import java.util.List;
@@ -31,22 +32,29 @@ public class GameController {
     }
 
     @PutMapping("/move")
-    public void makeMove(@RequestParam Integer location) {
-        System.out.println("Move request to location " + location + ".");
-        gameService.makeMove(location-1);
+    public void makeMove(@RequestParam Integer location, @RequestParam Character player) {
+        System.out.println("Move request to location " + location + " for player '" + player + "'.");
+        gameService.makeMove(location-1, player);
     }
 
-    @GetMapping("/get")
+    @GetMapping("/show")
     @ResponseBody
     public List<Board> getCurrentGame() {
         System.out.println("Check game status request.");
         return gameService.getCurrentGame();
     }
 
-    @GetMapping("/who")
+    @GetMapping("/next")
     @ResponseBody
-    public Character whoShouldMove() {
+    public Move getNextMove() {
         System.out.println("Check current player request.");
-        return gameService.whoShouldMove();
+        return gameService.getNextMove();
+    }
+
+    @GetMapping("/winner")
+    @ResponseBody
+    public Character whoWins() {
+        System.out.println("Check for winner request.");
+        return gameService.getWinner();
     }
 }

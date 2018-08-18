@@ -34,8 +34,4 @@ public class Board {
     public Character getWinner() {
         return winner;
     }
-
-    public void setWinner(Character winner) {
-        this.winner = winner;
-    }
 }

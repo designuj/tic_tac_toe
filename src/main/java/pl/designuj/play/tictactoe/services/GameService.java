@@ -2,6 +2,7 @@ package pl.designuj.play.tictactoe.services;
 
 import org.springframework.stereotype.Service;
 import pl.designuj.play.tictactoe.model.Board;
+import pl.designuj.play.tictactoe.model.Move;
 
 import java.util.List;
 
@@ -10,7 +11,6 @@ import static pl.designuj.play.tictactoe.configuration.GameConfiguration.BOARD_L
 
 @Service
 public class GameService implements GameAPI {
-
 
     private BoardService boardService;
 
@@ -31,13 +31,19 @@ public class GameService implements GameAPI {
     }
 
     @Override
-    public Character whoShouldMove() {
-        return boardService.getCurrentPlayer();
+    public Move getNextMove() {
+        return new Move(boardService.getCurrentPlayer(), boardService.getCurrentBoard()+1);
     }
 
     @Override
-    public void makeMove(Integer location) {
-        if (location >= BOARD_FIRST_INDEX && location <= BOARD_LAST_INDEX)
-        boardService.makeMove(location);
+    public void makeMove(Integer location, Character player) {
+        if ((location >= BOARD_FIRST_INDEX && location <= BOARD_LAST_INDEX) && (player == boardService.getCurrentPlayer())) {
+            boardService.makeMove(location);
+        }
+    }
+
+    @Override
+    public Character getWinner() {
+        return boardService.checkForWin();
     }
 }

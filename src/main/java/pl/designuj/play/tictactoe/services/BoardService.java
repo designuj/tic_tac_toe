@@ -20,30 +20,16 @@ public class BoardService implements BoardAPI {
         refresh();
     }
 
+    @Override
     public void refresh() {
         for (int i = BOARD_FIRST_INDEX; i <= BOARD_LAST_INDEX; i++) {
             boardsInGame.add(new Board());
         }
     }
 
-    public Boolean isGameFinish() {
-        boolean full = false;
-
-        for (Board boardInGame : boardsInGame) {
-            for (Character charInBoard : boardInGame.getCharsInBoard() ) {
-                if (charInBoard == EMPTY_LOCATION) {
-                    full = true;
-                    break;
-                }
-                break;
-            }
-        }
-
-        return full;
-    }
-
+    @Override
     public void makeMove(Integer location) {
-        if (boardsInGame.get(currentBoard).getCharsInBoard().get(location) == ' ') {
+        if (boardsInGame.get(currentBoard).getCharsInBoard().get(location) == EMPTY_LOCATION) {
             boardsInGame.get(currentBoard).getCharsInBoard().set(location, currentPlayer);
             switchUser();
             switchBoard(location);
@@ -51,6 +37,7 @@ public class BoardService implements BoardAPI {
         }
     }
 
+    @Override
     public void switchUser() {
         if (currentPlayer == FIRST_PLAYER) {
             currentPlayer = SECOND_PLAYER;
@@ -59,10 +46,12 @@ public class BoardService implements BoardAPI {
         }
     }
 
+    @Override
     public void switchBoard(Integer location) {
         currentBoard = location;
     }
 
+    @Override
     public Character checkForWin() {
         for (int i = BOARD_FIRST_INDEX; i <= BOARD_LAST_INDEX; i++) {
             if (
@@ -99,29 +88,29 @@ public class BoardService implements BoardAPI {
         }
 
         if (
-                    boardsInGame.get(0).getWinner() == 'x' && boardsInGame.get(1).getWinner() == 'x' && boardsInGame.get(2).getWinner() == 'x' ||
-                    boardsInGame.get(3).getWinner() == 'x' && boardsInGame.get(4).getWinner() == 'x' && boardsInGame.get(5).getWinner() == 'x' ||
-                    boardsInGame.get(6).getWinner() == 'x' && boardsInGame.get(7).getWinner() == 'x' && boardsInGame.get(8).getWinner() == 'x' ||
+                            boardsInGame.get(0).getWinner() == 'x' && boardsInGame.get(1).getWinner() == 'x' && boardsInGame.get(2).getWinner() == 'x' ||
+                            boardsInGame.get(3).getWinner() == 'x' && boardsInGame.get(4).getWinner() == 'x' && boardsInGame.get(5).getWinner() == 'x' ||
+                            boardsInGame.get(6).getWinner() == 'x' && boardsInGame.get(7).getWinner() == 'x' && boardsInGame.get(8).getWinner() == 'x' ||
 
-                    boardsInGame.get(0).getWinner() == 'x' && boardsInGame.get(3).getWinner() == 'x' && boardsInGame.get(6).getWinner() == 'x' ||
-                    boardsInGame.get(1).getWinner() == 'x' && boardsInGame.get(4).getWinner() == 'x' && boardsInGame.get(7).getWinner() == 'x' ||
-                    boardsInGame.get(2).getWinner() == 'x' && boardsInGame.get(5).getWinner() == 'x' && boardsInGame.get(8).getWinner() == 'x' ||
+                            boardsInGame.get(0).getWinner() == 'x' && boardsInGame.get(3).getWinner() == 'x' && boardsInGame.get(6).getWinner() == 'x' ||
+                            boardsInGame.get(1).getWinner() == 'x' && boardsInGame.get(4).getWinner() == 'x' && boardsInGame.get(7).getWinner() == 'x' ||
+                            boardsInGame.get(2).getWinner() == 'x' && boardsInGame.get(5).getWinner() == 'x' && boardsInGame.get(8).getWinner() == 'x' ||
 
-                    boardsInGame.get(0).getWinner() == 'x' && boardsInGame.get(4).getWinner() == 'x' && boardsInGame.get(8).getWinner() == 'x' ||
-                    boardsInGame.get(2).getWinner() == 'x' && boardsInGame.get(4).getWinner() == 'x' && boardsInGame.get(6).getWinner() == 'x'
+                            boardsInGame.get(0).getWinner() == 'x' && boardsInGame.get(4).getWinner() == 'x' && boardsInGame.get(8).getWinner() == 'x' ||
+                            boardsInGame.get(2).getWinner() == 'x' && boardsInGame.get(4).getWinner() == 'x' && boardsInGame.get(6).getWinner() == 'x'
         ) {
             return  SECOND_PLAYER;
         } else if (
-                        boardsInGame.get(0).getWinner() == 'o' && boardsInGame.get(1).getWinner() == 'o' && boardsInGame.get(2).getWinner() == 'o' ||
-                        boardsInGame.get(3).getWinner() == 'o' && boardsInGame.get(4).getWinner() == 'o' && boardsInGame.get(5).getWinner() == 'o' ||
-                        boardsInGame.get(6).getWinner() == 'o' && boardsInGame.get(7).getWinner() == 'o' && boardsInGame.get(8).getWinner() == 'o' ||
+                            boardsInGame.get(0).getWinner() == 'o' && boardsInGame.get(1).getWinner() == 'o' && boardsInGame.get(2).getWinner() == 'o' ||
+                            boardsInGame.get(3).getWinner() == 'o' && boardsInGame.get(4).getWinner() == 'o' && boardsInGame.get(5).getWinner() == 'o' ||
+                            boardsInGame.get(6).getWinner() == 'o' && boardsInGame.get(7).getWinner() == 'o' && boardsInGame.get(8).getWinner() == 'o' ||
 
-                        boardsInGame.get(0).getWinner() == 'o' && boardsInGame.get(3).getWinner() == 'o' && boardsInGame.get(6).getWinner() == 'o' ||
-                        boardsInGame.get(1).getWinner() == 'o' && boardsInGame.get(4).getWinner() == 'o' && boardsInGame.get(7).getWinner() == 'o' ||
-                        boardsInGame.get(2).getWinner() == 'o' && boardsInGame.get(5).getWinner() == 'o' && boardsInGame.get(8).getWinner() == 'o' ||
+                            boardsInGame.get(0).getWinner() == 'o' && boardsInGame.get(3).getWinner() == 'o' && boardsInGame.get(6).getWinner() == 'o' ||
+                            boardsInGame.get(1).getWinner() == 'o' && boardsInGame.get(4).getWinner() == 'o' && boardsInGame.get(7).getWinner() == 'o' ||
+                            boardsInGame.get(2).getWinner() == 'o' && boardsInGame.get(5).getWinner() == 'o' && boardsInGame.get(8).getWinner() == 'o' ||
 
-                        boardsInGame.get(0).getWinner() == 'o' && boardsInGame.get(4).getWinner() == 'o' && boardsInGame.get(8).getWinner() == 'o' ||
-                        boardsInGame.get(2).getWinner() == 'o' && boardsInGame.get(4).getWinner() == 'o' && boardsInGame.get(6).getWinner() == 'o'
+                            boardsInGame.get(0).getWinner() == 'o' && boardsInGame.get(4).getWinner() == 'o' && boardsInGame.get(8).getWinner() == 'o' ||
+                            boardsInGame.get(2).getWinner() == 'o' && boardsInGame.get(4).getWinner() == 'o' && boardsInGame.get(6).getWinner() == 'o'
 
         ) {
             return FIRST_PLAYER;
@@ -130,18 +119,22 @@ public class BoardService implements BoardAPI {
         }
     }
 
+    @Override
     public Character getCurrentPlayer() {
         return currentPlayer;
     }
 
+    @Override
     public Integer getCurrentBoard() {
         return currentBoard;
     }
 
+    @Override
     public void setWinner(Character winner) {
         this.winner = winner;
     }
 
+    @Override
     public List<Board> getBoardsInGame() {
         return boardsInGame;
     }
