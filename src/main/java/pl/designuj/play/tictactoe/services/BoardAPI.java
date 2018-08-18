@@ -5,10 +5,14 @@ import pl.designuj.play.tictactoe.model.*;
 import java.util.List;
 
 public interface BoardAPI {
-    void refresh(Character player);
+    void refresh();
     Boolean isGameFinish();
-    List<Board> getGame();
-    Character whoShouldMakeMove();
     void makeMove(Integer location);
-    Character getPlayer();
+    void switchUser();
+    void switchBoard(Integer location);
+    Character checkForWin();
+    Character getCurrentPlayer();
+    Integer getCurrentBoard();
+    void setWinner(Character winner);
+    List<Board> getBoardsInGame();
 }

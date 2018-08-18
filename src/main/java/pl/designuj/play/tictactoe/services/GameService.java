@@ -1,14 +1,16 @@
 package pl.designuj.play.tictactoe.services;
 
 import org.springframework.stereotype.Service;
-import pl.designuj.play.tictactoe.model.*;
+import pl.designuj.play.tictactoe.model.Board;
 
 import java.util.List;
 
+import static pl.designuj.play.tictactoe.configuration.GameConfiguration.BOARD_FIRST_INDEX;
+import static pl.designuj.play.tictactoe.configuration.GameConfiguration.BOARD_LAST_INDEX;
+
 @Service
 public class GameService implements GameAPI {
-    private final Integer BOARD_FIRST_INDEX = 0;
-    private final Integer BOARD_LAST_INDEX = 8;
+
 
     private BoardService boardService;
 
@@ -19,7 +21,7 @@ public class GameService implements GameAPI {
     @Override
     public void createNewGame(Boolean confirm) {
         if (confirm) {
-            boardService.refresh(' ');
+            boardService.refresh();
         }
     }
 
@@ -30,7 +32,7 @@ public class GameService implements GameAPI {
 
     @Override
     public Character whoShouldMove() {
-        return boardService.getPlayer();
+        return boardService.getCurrentPlayer();
     }
 
     @Override

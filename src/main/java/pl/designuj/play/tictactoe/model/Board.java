@@ -1,22 +1,21 @@
 package pl.designuj.play.tictactoe.model;
 
-import org.springframework.beans.factory.annotation.*;
-import org.springframework.context.annotation.*;
-import org.springframework.stereotype.*;
+import java.util.ArrayList;
+import java.util.List;
 
-import java.util.*;
+import static pl.designuj.play.tictactoe.configuration.GameConfiguration.*;
 
 public class Board {
 
     private List<Character> charsInBoard = new ArrayList<>();
-    private Character setToWin;
+    private Character winner = EMPTY_LOCATION;
 
     public Board() {
-        refresh(' ');
+        refresh(EMPTY_LOCATION);
     }
 
     public void refresh(Character player) {
-        for (int i = 0; i < 9; i++) {
+        for (int i = BOARD_FIRST_INDEX; i <= BOARD_LAST_INDEX; i++) {
             charsInBoard.add(player);
         }
     }
@@ -26,10 +25,17 @@ public class Board {
 
     }
 
-
-    public void setWholeBoard(Character player) {
-        for (int i = 0; i < charsInBoard.size(); i++) {
+    public void setWinnerInBoard(Character player) {
+        for (int i = BOARD_FIRST_INDEX; i <= BOARD_LAST_INDEX; i++) {
             charsInBoard.set(i, player);
         }
+    }
+
+    public Character getWinner() {
+        return winner;
+    }
+
+    public void setWinner(Character winner) {
+        this.winner = winner;
     }
 }
