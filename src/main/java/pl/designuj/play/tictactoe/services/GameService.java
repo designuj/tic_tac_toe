@@ -12,9 +12,9 @@ import static pl.designuj.play.tictactoe.configuration.GameConfiguration.BOARD_L
 @Service
 public class GameService implements GameAPI {
 
-    private BoardService boardService;
+    private BoardAPI boardService;
 
-    public GameService(BoardService boardService) {
+    public GameService(BoardAPI boardService) {
         this.boardService = boardService;
     }
 
