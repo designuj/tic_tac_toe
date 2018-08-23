@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RestController;
 import pl.designuj.play.tictactoe.model.Board;
 import pl.designuj.play.tictactoe.model.Move;
 import pl.designuj.play.tictactoe.services.GameAPI;
-import pl.designuj.play.tictactoe.services.GameService;
 
 import java.util.List;
 
@@ -19,38 +18,38 @@ import java.util.List;
 @RequestMapping("/game")
 public class GameController {
 
-    private GameAPI gameService;
+    private GameAPI gameAPI;
 
     @Autowired
     public GameController(GameAPI gameService) {
-        this.gameService = gameService;
+        this.gameAPI = gameService;
     }
 
     @PutMapping("/new")
     public void createNewGame(@RequestParam Boolean confirm) {
-        gameService.createNewGame(confirm);
+        gameAPI.createNewGame(confirm);
     }
 
     @PutMapping("/move")
     public void makeMove(@RequestParam Integer location, @RequestParam Character player) {
-        gameService.makeMove(location-1, player);
+        gameAPI.makeMove(location-1, player);
     }
 
     @GetMapping("/show")
     @ResponseBody
     public List<Board> getCurrentGame() {
-        return gameService.getCurrentGame();
+        return gameAPI.getCurrentGame();
     }
 
     @GetMapping("/next")
     @ResponseBody
     public Move getNextMove() {
-        return gameService.getNextMove();
+        return gameAPI.getNextMove();
     }
 
     @GetMapping("/winner")
     @ResponseBody
     public Character whoWins() {
-        return gameService.getWinner();
+        return gameAPI.getWinner();
     }
 }

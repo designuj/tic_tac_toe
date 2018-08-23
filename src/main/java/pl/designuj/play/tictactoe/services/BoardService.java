@@ -17,11 +17,11 @@ public class BoardService implements BoardAPI {
     private List<Board> boardsInGame = new ArrayList<>();
 
     public BoardService() {
-        refresh();
+        reset();
     }
 
     @Override
-    public void refresh() {
+    public void reset() {
         for (int i = BOARD_FIRST_INDEX; i <= BOARD_LAST_INDEX; i++) {
             boardsInGame.add(new Board());
         }

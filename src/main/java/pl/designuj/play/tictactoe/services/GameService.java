@@ -12,38 +12,38 @@ import static pl.designuj.play.tictactoe.configuration.GameConfiguration.BOARD_L
 @Service
 public class GameService implements GameAPI {
 
-    private BoardAPI boardService;
+    private BoardAPI boardAPI;
 
     public GameService(BoardAPI boardService) {
-        this.boardService = boardService;
+        this.boardAPI = boardService;
     }
 
     @Override
     public void createNewGame(Boolean confirm) {
         if (confirm) {
-            boardService.refresh();
+            boardAPI.reset();
         }
     }
 
     @Override
     public List<Board> getCurrentGame() {
-        return boardService.getBoardsInGame();
+        return boardAPI.getBoardsInGame();
     }
 
     @Override
     public Move getNextMove() {
-        return new Move(boardService.getCurrentPlayer(), boardService.getCurrentBoard()+1);
+        return new Move(boardAPI.getCurrentPlayer(), boardAPI.getCurrentBoard()+1);
     }
 
     @Override
     public void makeMove(Integer location, Character player) {
-        if ((location >= BOARD_FIRST_INDEX && location <= BOARD_LAST_INDEX) && (player == boardService.getCurrentPlayer())) {
-            boardService.makeMove(location);
+        if ((location >= BOARD_FIRST_INDEX && location <= BOARD_LAST_INDEX) && (player == boardAPI.getCurrentPlayer())) {
+            boardAPI.makeMove(location);
         }
     }
 
     @Override
     public Character getWinner() {
-        return boardService.checkForWin();
+        return boardAPI.checkForWin();
     }
 }

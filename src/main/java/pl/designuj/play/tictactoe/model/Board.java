@@ -14,7 +14,7 @@ public class Board {
         refresh(EMPTY_LOCATION);
     }
 
-    public void refresh(Character player) {
+    void refresh(Character player) {
         for (int i = BOARD_FIRST_INDEX; i <= BOARD_LAST_INDEX; i++) {
             charsInBoard.add(player);
         }

@@ -24,3 +24,10 @@ Program:
 012 012 012
 345 345 345
 678 678 678
+
+
+mapa
+znak czy null
+-- oddac -- (gitlab)
+testy + mockito
+testy integracyjne REST ASSURED

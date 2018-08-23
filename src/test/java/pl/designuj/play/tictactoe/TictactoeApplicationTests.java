@@ -41,7 +41,7 @@ public class TictactoeApplicationTests {
 	}
 
 	@Test
-	public void wringCheckTest() {
+	public void wrongMoveCheckTest() {
 		//Given
 		GameService gameService = new GameService(new BoardService());
 		char checkMove;

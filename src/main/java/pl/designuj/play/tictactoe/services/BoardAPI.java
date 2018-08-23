@@ -5,7 +5,7 @@ import pl.designuj.play.tictactoe.model.Board;
 import java.util.List;
 
 public interface BoardAPI {
-    void refresh();
+    void reset();
     void makeMove(Integer location);
     void switchUser();
     void switchBoard(Integer location);
