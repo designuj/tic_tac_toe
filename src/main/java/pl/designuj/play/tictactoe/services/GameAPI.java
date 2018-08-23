@@ -1,14 +1,9 @@
 package pl.designuj.play.tictactoe.services;
 
-import pl.designuj.play.tictactoe.model.Board;
-import pl.designuj.play.tictactoe.model.Move;
-
 import java.util.List;
+import java.util.Map;
 
 public interface GameAPI {
-    void createNewGame(Boolean confirm);
-    List<Board> getCurrentGame();
-    Move getNextMove();
-    void makeMove(Integer location, Character player);
-    Character getWinner();
+    List<Map<Integer, Character>> createGame(Boolean confirm);
+    List<Map<Integer, Character>> makeMove(Character player, Integer location);
 }
