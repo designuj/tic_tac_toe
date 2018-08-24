@@ -18,7 +18,7 @@ public class GameService implements GameAPI {
         this.boardAPI = boardService;
     }
 
-    @Override
+    @Overridegit
     public void createNewGame(Boolean confirm) {
         if (confirm) {
             boardAPI.reset();
