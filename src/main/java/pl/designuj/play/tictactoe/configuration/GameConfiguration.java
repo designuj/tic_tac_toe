@@ -1,5 +1,8 @@
 package pl.designuj.play.tictactoe.configuration;
 
+import org.springframework.stereotype.Service;
+
+@Service
 public class GameConfiguration {
     public static final Integer PRESET_COUNTING = 1;
     public static final Integer BOARD_FIRST_INDEX = 0;
