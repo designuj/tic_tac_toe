@@ -1,49 +1,45 @@
 package pl.designuj.play.tictactoe.services;
 
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
-import pl.designuj.play.tictactoe.model.Board;
-import pl.designuj.play.tictactoe.model.Move;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
-import static pl.designuj.play.tictactoe.configuration.GameConfiguration.BOARD_FIRST_INDEX;
-import static pl.designuj.play.tictactoe.configuration.GameConfiguration.BOARD_LAST_INDEX;
+import static pl.designuj.play.tictactoe.configuration.GameConfiguration.*;
 
 @Service
-public class GameService implements GameAPI {
+public class GameService {
 
-    private BoardAPI boardAPI;
+    private BoardService boardService;
 
-    public GameService(BoardAPI boardService) {
-        this.boardAPI = boardService;
+    public GameService(BoardService boardService) {
+        this.boardService = boardService;
     }
 
-    @Overridegit
-    public void createNewGame(Boolean confirm) {
+    private List<Map<Integer, Character>> boards = new ArrayList<>();
+
+    public List<Map<Integer, Character>> createGame(Boolean confirm) {
         if (confirm) {
-            boardAPI.reset();
+            for (int i = BOARD_FIRST_INDEX; i < BOARD_LAST_INDEX + PRESET_COUNTING; i++) {
+                boards.add(new HashMap<>());
+                for (int j = BOARD_FIRST_INDEX; j < BOARD_LAST_INDEX + PRESET_COUNTING; j++) {
+                    boards.get(i).put(j, null);
+                }
+            }
+            return boards;
+        } else {
+            return null;
         }
     }
 
-    @Override
-    public List<Board> getCurrentGame() {
-        return boardAPI.getBoardsInGame();
+    public List<Map<Integer, Character>> makeMove(Character player, Integer location)  {
+        return null;
     }
 
-    @Override
-    public Move getNextMove() {
-        return new Move(boardAPI.getCurrentPlayer(), boardAPI.getCurrentBoard()+1);
-    }
-
-    @Override
-    public void makeMove(Integer location, Character player) {
-        if ((location >= BOARD_FIRST_INDEX && location <= BOARD_LAST_INDEX) && (player == boardAPI.getCurrentPlayer())) {
-            boardAPI.makeMove(location);
-        }
-    }
-
-    @Override
-    public Character getWinner() {
-        return boardAPI.checkForWin();
+    public List<Map<Integer, Character>> getBoards() {
+        return boards;
     }
 }
