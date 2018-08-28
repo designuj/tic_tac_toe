@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import pl.designuj.play.tictactoe.services.GameService;
 
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -21,19 +22,25 @@ public class GameController {
 
     @PutMapping("/new")
     @ResponseBody
-    public String createGame(@RequestParam Boolean confirm) {
-        return gameService.createGame(confirm).toString();
+    public List<Map<Integer, Character>> createGame(@RequestParam Boolean confirm) {
+        return gameService.createGame(confirm);
     }
 
     @PutMapping("/move")
     @ResponseBody
-    public String makeMove(@RequestParam Character player, @RequestParam Integer location) {
-        return gameService.makeMove(player, location).toString();
+    public List<Map<Integer, Character>> makeMove(@RequestParam Character player, @RequestParam Integer location) {
+        return gameService.makeMove(player, location);
     }
 
     @GetMapping("/get")
     @ResponseBody
-    public String getBoards() {
-        return gameService.getBoards().toString();
+    public List<Map<Integer, Character>> getBoards() {
+        return gameService.getBoards();
+    }
+
+    @GetMapping("/wins")
+    @ResponseBody
+    public List<Character> getWins() {
+        return gameService.getBoardsWins();
     }
 }

@@ -40,11 +40,14 @@ public class GameService {
     }
 
     public List<Map<Integer, Character>> makeMove(Character player, Integer location)  {
+        location -= PRESET_COUNTING;
+
         if (boardService.getWinner() == EMPTY_LOCATION) {
-            if (player == boardService.getCurrentPlayer() && boardsWins.get(boardService.getCurrentBoard()) == EMPTY_LOCATION) {
+            if (player == boardService.getCurrentPlayer() && boardsWins.get(boardService.getCurrentBoard()) == null && boards.get(boardService.getCurrentBoard()).get(location) == null) {
                 boards.get(boardService.getCurrentBoard()).replace(location, player);
 
                 if (boardService.checkCurrentBoard(boards.get(boardService.getCurrentBoard()))) {
+                    boardsWins.set(boardService.getCurrentBoard(), player);
                     boardService.checkAllBoards(boardsWins);
                 }
 

@@ -2,6 +2,7 @@ package pl.designuj.play.tictactoe.services;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -11,6 +12,7 @@ import static pl.designuj.play.tictactoe.configuration.GameConfiguration.*;
 
 @Service
 @Getter
+@Setter
 @NoArgsConstructor
 public class BoardService {
 
@@ -53,7 +55,7 @@ public class BoardService {
     public void checkAllBoards(List<Character> boardsWins) {
         for (int i = BOARD_FIRST_INDEX; i < WIN_SCHEMA.size(); i++) {
             if (boardsWins.get(WIN_SCHEMA.get(i)[ITERATOR_1]) == currentPlayer && boardsWins.get(WIN_SCHEMA.get(i)[ITERATOR_2]) == currentPlayer && boardsWins.get(WIN_SCHEMA.get(i)[ITERATOR_3]) == currentPlayer) {
-                winner = currentPlayer;
+                setWinner(currentPlayer);
             }
         }
     }
