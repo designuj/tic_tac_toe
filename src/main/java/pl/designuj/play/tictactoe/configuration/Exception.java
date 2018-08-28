@@ -6,5 +6,5 @@ class Exception {
 class MoveNotAllowedException extends RuntimeException {
 }
 
-class LocationNotAllowedException extends RuntimeException {
+class BoardAlreadyFullException extends RuntimeException {
 }
