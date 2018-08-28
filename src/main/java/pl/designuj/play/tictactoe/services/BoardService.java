@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Map;
 
 import static pl.designuj.play.tictactoe.configuration.GameConfiguration.*;
@@ -15,6 +16,7 @@ public class BoardService {
 
     private Character currentPlayer = FIRST_PLAYER;
     private Integer currentBoard = FIRST_BOARD;
+    private Character winner = EMPTY_LOCATION;
 
     public void switchUser(Character player) {
         if (player == FIRST_PLAYER) {
@@ -48,7 +50,11 @@ public class BoardService {
         }
     }
 
-    public void checkAllBoards() {
-
+    public void checkAllBoards(List<Character> boardsWins) {
+        for (int i = BOARD_FIRST_INDEX; i < WIN_SCHEMA.size(); i++) {
+            if (boardsWins.get(WIN_SCHEMA.get(i)[ITERATOR_1]) == currentPlayer && boardsWins.get(WIN_SCHEMA.get(i)[ITERATOR_2]) == currentPlayer && boardsWins.get(WIN_SCHEMA.get(i)[ITERATOR_3]) == currentPlayer) {
+                winner = currentPlayer;
+            }
+        }
     }
 }
