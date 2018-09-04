@@ -43,4 +43,10 @@ public class GameController {
     public List<Character> getWins() {
         return gameService.getBoardsWins();
     }
+
+    @GetMapping("/test")
+    @ResponseBody
+    public String test() {
+        return "Test!";
+    }
 }

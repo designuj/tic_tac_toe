@@ -17,8 +17,8 @@ import static pl.designuj.play.tictactoe.configuration.GameConfiguration.*;
 public class GameService {
 
     private BoardService boardService;
-    private List<Map<Integer, Character>> boards = new ArrayList<>();
-    private List<Character> boardsWins = new ArrayList<>();
+    private List<Map<Integer, Character>> boards;
+    private List<Character> boardsWins;
 
     public GameService(BoardService boardService) {
         this.boardService = boardService;
@@ -26,11 +26,13 @@ public class GameService {
 
     public List<Map<Integer, Character>> createGame(Boolean confirm) {
         if (confirm) {
-            for (int i = BOARD_FIRST_INDEX; i < BOARD_LAST_INDEX + PRESET_COUNTING; i++) {
+            setToNew();
+
+            for (int i = BOARD_FIRST_INDEX; i <= BOARD_LAST_INDEX; i++) {
                 boards.add(new HashMap<>());
-                boardsWins.add(null);
-                for (int j = BOARD_FIRST_INDEX; j < BOARD_LAST_INDEX + PRESET_COUNTING; j++) {
-                    boards.get(i).put(j, null);
+                boardsWins.add(EMPTY_LOCATION);
+                for (int j = BOARD_FIRST_INDEX; j <= BOARD_LAST_INDEX; j++) {
+                    boards.get(i).put(j, EMPTY_LOCATION);
                 }
             }
             return boards;
@@ -43,7 +45,7 @@ public class GameService {
         location -= PRESET_COUNTING;
 
         if (boardService.getWinner() == EMPTY_LOCATION) {
-            if (player == boardService.getCurrentPlayer() && boardsWins.get(boardService.getCurrentBoard()) == null && boards.get(boardService.getCurrentBoard()).get(location) == null) {
+            if (player == boardService.getCurrentPlayer() && boardsWins.get(boardService.getCurrentBoard()) == EMPTY_LOCATION && boards.get(boardService.getCurrentBoard()).get(location) == EMPTY_LOCATION) {
                 boards.get(boardService.getCurrentBoard()).replace(location, player);
 
                 if (boardService.checkCurrentBoard(boards.get(boardService.getCurrentBoard()))) {
@@ -51,7 +53,7 @@ public class GameService {
                     boardService.checkAllBoards(boardsWins);
                 }
 
-                boardService.switchUser(player);
+                boardService.switchUser();
                 boardService.switchBoard(location);
             }
         }
@@ -59,7 +61,11 @@ public class GameService {
         return boards;
     }
 
-    public List<Map<Integer, Character>> getBoards() {
-        return boards;
+    public void setToNew() {
+        boards = new ArrayList<>();
+        boardsWins = new ArrayList<>();
+        boardService.setCurrentBoard(FIRST_BOARD);
+        boardService.setCurrentPlayer(FIRST_PLAYER);
+        boardService.setWinner(EMPTY_LOCATION);
     }
 }

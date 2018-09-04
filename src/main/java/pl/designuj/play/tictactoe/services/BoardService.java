@@ -16,12 +16,12 @@ import static pl.designuj.play.tictactoe.configuration.GameConfiguration.*;
 @NoArgsConstructor
 public class BoardService {
 
-    private Character currentPlayer = FIRST_PLAYER;
-    private Integer currentBoard = FIRST_BOARD;
-    private Character winner = EMPTY_LOCATION;
+    private Character currentPlayer;
+    private Integer currentBoard;
+    private Character winner;
 
-    public void switchUser(Character player) {
-        if (player == FIRST_PLAYER) {
+    public void switchUser() {
+        if (currentPlayer == FIRST_PLAYER) {
             currentPlayer = SECOND_PLAYER;
         } else {
             currentPlayer = FIRST_PLAYER;

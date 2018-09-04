@@ -2,47 +2,69 @@ package pl.designuj.play.tictactoe.controllers;
 
 import org.junit.Before;
 import org.junit.Test;
-import pl.designuj.play.tictactoe.services.BoardService;
-import pl.designuj.play.tictactoe.services.GameService;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringRunner;
 
 import static org.junit.Assert.*;
 
+@RunWith(SpringRunner.class)
+@SpringBootTest
 public class GameControllerTest {
+
+    @Autowired
+    GameController gameController;
 
     @Before
     public void setUp() {
-
+        gameController.createGame(true);
     }
 
     @Test
     public void createGame() {
         //Given
-        GameController gameController = new GameController(new GameService(new BoardService()));
+
 
         //When
-        gameController.createGame(true);
+        Integer boardsCount = gameController.getBoards().size();
 
         //Then
-        assertEquals(gameController.getBoards().size(), 9);
+        assertEquals(boardsCount.intValue(), 9);
     }
 
     @Test
     public void makeMove() {
         //Given
-        GameController gameController = new GameController(new GameService(new BoardService()));
 
         //When
         gameController.makeMove('o', 5);
 
         //Then
-        //assertEquals(gameController.getBoards().get(4));
+        assertEquals((gameController.getBoards().get(4).get(4)).charValue(), 'o');
     }
 
     @Test
     public void getBoards() {
+        //Given
+
+        //When
+
+        //Then
     }
 
     @Test
     public void getWins() {
+        //Given
+
+        //When
+        gameController.makeMove('o', 4);
+        gameController.makeMove('x', 5);
+        gameController.makeMove('o', 6);
+        gameController.makeMove('x', 5);
+        gameController.makeMove('o', 5);
+
+        //Then
+        assertEquals(gameController.getWins().get(4).charValue(), 'o');
     }
 }
