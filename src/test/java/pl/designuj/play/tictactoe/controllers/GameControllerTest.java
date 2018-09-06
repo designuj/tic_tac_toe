@@ -6,6 +6,7 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
+import pl.designuj.play.tictactoe.configuration.WrongMoveException;
 
 import static org.junit.Assert.*;
 
@@ -42,6 +43,15 @@ public class GameControllerTest {
 
         //Then
         assertEquals((gameController.getBoards().get(4).get(4)).charValue(), 'o');
+    }
+
+    @Test(expected = WrongMoveException.class)
+    public void makeMove_fieldNotEmpty() {
+        //Given
+        gameController.makeMove('o', 5);
+
+        //When & Then
+        gameController.makeMove('x', 5);
     }
 
     @Test

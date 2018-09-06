@@ -16,9 +16,9 @@ import static pl.designuj.play.tictactoe.configuration.GameConfiguration.*;
 @NoArgsConstructor
 public class BoardService {
 
+    private Character gameWinner;
     private Character currentPlayer;
     private Integer currentBoard;
-    private Character winner;
 
     public void switchUser() {
         if (currentPlayer == FIRST_PLAYER) {
@@ -33,13 +33,16 @@ public class BoardService {
     }
 
     public boolean checkCurrentBoard(Map<Integer, Character> board) {
-        Boolean win = false;
+        Boolean win = Boolean.FALSE;
 
         for (int i = BOARD_FIRST_INDEX; i < WIN_SCHEMA.size(); i++) {
-            if (board.get(WIN_SCHEMA.get(i)[ITERATOR_1]) == currentPlayer && board.get(WIN_SCHEMA.get(i)[ITERATOR_2]) == currentPlayer && board.get(WIN_SCHEMA.get(i)[ITERATOR_3]) == currentPlayer) {
+            if (board.get(WIN_SCHEMA.get(i)[ITERATOR_1]) == currentPlayer &&
+                    board.get(WIN_SCHEMA.get(i)[ITERATOR_2]) == currentPlayer &&
+                    board.get(WIN_SCHEMA.get(i)[ITERATOR_3]) == currentPlayer) {
                 win = true;
 
                 setBoardToWin(board);
+                break;
             }
         }
 
@@ -54,8 +57,10 @@ public class BoardService {
 
     public void checkAllBoards(List<Character> boardsWins) {
         for (int i = BOARD_FIRST_INDEX; i < WIN_SCHEMA.size(); i++) {
-            if (boardsWins.get(WIN_SCHEMA.get(i)[ITERATOR_1]) == currentPlayer && boardsWins.get(WIN_SCHEMA.get(i)[ITERATOR_2]) == currentPlayer && boardsWins.get(WIN_SCHEMA.get(i)[ITERATOR_3]) == currentPlayer) {
-                setWinner(currentPlayer);
+            if (boardsWins.get(WIN_SCHEMA.get(i)[ITERATOR_1]) == currentPlayer &&
+                    boardsWins.get(WIN_SCHEMA.get(i)[ITERATOR_2]) == currentPlayer &&
+                    boardsWins.get(WIN_SCHEMA.get(i)[ITERATOR_3]) == currentPlayer) {
+                setGameWinner(currentPlayer);
             }
         }
     }

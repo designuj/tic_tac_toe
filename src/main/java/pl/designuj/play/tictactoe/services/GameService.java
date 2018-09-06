@@ -3,6 +3,8 @@ package pl.designuj.play.tictactoe.services;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.stereotype.Service;
+import pl.designuj.play.tictactoe.configuration.GameNotAvailableException;
+import pl.designuj.play.tictactoe.configuration.WrongMoveException;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -29,23 +31,25 @@ public class GameService {
             setToNew();
 
             for (int i = BOARD_FIRST_INDEX; i <= BOARD_LAST_INDEX; i++) {
-                boards.add(new HashMap<>());
                 boardsWins.add(EMPTY_LOCATION);
+                boards.add(new HashMap<>());
                 for (int j = BOARD_FIRST_INDEX; j <= BOARD_LAST_INDEX; j++) {
                     boards.get(i).put(j, EMPTY_LOCATION);
                 }
             }
             return boards;
         } else {
-            return null;
+            throw new GameNotAvailableException();
         }
     }
 
     public List<Map<Integer, Character>> makeMove(Character player, Integer location)  {
         location -= PRESET_COUNTING;
 
-        if (boardService.getWinner() == EMPTY_LOCATION) {
-            if (player == boardService.getCurrentPlayer() && boardsWins.get(boardService.getCurrentBoard()) == EMPTY_LOCATION && boards.get(boardService.getCurrentBoard()).get(location) == EMPTY_LOCATION) {
+        if (boardService.getGameWinner() == null) {
+            if (player == boardService.getCurrentPlayer() &&
+                    boardsWins.get(boardService.getCurrentBoard()) == null &&
+                    boards.get(boardService.getCurrentBoard()).get(location) == null) {
                 boards.get(boardService.getCurrentBoard()).replace(location, player);
 
                 if (boardService.checkCurrentBoard(boards.get(boardService.getCurrentBoard()))) {
@@ -55,17 +59,21 @@ public class GameService {
 
                 boardService.switchUser();
                 boardService.switchBoard(location);
+            } else {
+                throw new WrongMoveException();
             }
+        } else {
+            throw new GameNotAvailableException();
         }
 
         return boards;
     }
 
-    public void setToNew() {
+    private void setToNew() {
         boards = new ArrayList<>();
         boardsWins = new ArrayList<>();
         boardService.setCurrentBoard(FIRST_BOARD);
         boardService.setCurrentPlayer(FIRST_PLAYER);
-        boardService.setWinner(EMPTY_LOCATION);
+        boardService.setGameWinner(null);
     }
 }

@@ -79,6 +79,6 @@ public class BoardServiceTest {
         boardService.checkAllBoards(boardsWins);
 
         //Then
-        assertEquals(java.util.Optional.of('o').get(), boardService.getWinner());
+        assertEquals(java.util.Optional.of('o').get(), boardService.getGameWinner());
     }
 }
