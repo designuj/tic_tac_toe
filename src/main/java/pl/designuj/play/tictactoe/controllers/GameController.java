@@ -9,8 +9,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import pl.designuj.play.tictactoe.configuration.GameNotAvailableException;
-import pl.designuj.play.tictactoe.configuration.WrongMoveException;
-import pl.designuj.play.tictactoe.services.BoardService;
 import pl.designuj.play.tictactoe.services.GameService;
 
 import java.util.List;
@@ -27,9 +25,6 @@ public class GameController {
     @PutMapping("/new")
     @ResponseBody
     public List<Map<Integer, Character>> createGame(@RequestParam Boolean confirm) {
-        if (gameService.getBoards() == null) {
-            throw new GameNotAvailableException();
-        }
         return gameService.createGame(confirm);
     }
 
@@ -37,10 +32,10 @@ public class GameController {
     @PutMapping("/move")
     @ResponseBody
     public List<Map<Integer, Character>> makeMove(@RequestParam Character player, @RequestParam Integer location) {
-        if (gameService.getBoardService().getCurrentPlayer() == player || gameService.getBoardsWins().get(gameService.getBoardService().getCurrentBoard()) != null) {
-            return gameService.makeMove(player, location);
+        if (gameService.getBoards() == null) {
+            throw new GameNotAvailableException();
         }
-        throw new WrongMoveException();
+        return gameService.makeMove(player, location);
     }
 
     @GetMapping("/get")

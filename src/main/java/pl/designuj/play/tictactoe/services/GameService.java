@@ -31,10 +31,11 @@ public class GameService {
             setToNew();
 
             for (int i = BOARD_FIRST_INDEX; i <= BOARD_LAST_INDEX; i++) {
-                boardsWins.add(EMPTY_LOCATION);
+                boardsWins.add(null);
                 boards.add(new HashMap<>());
+
                 for (int j = BOARD_FIRST_INDEX; j <= BOARD_LAST_INDEX; j++) {
-                    boards.get(i).put(j, EMPTY_LOCATION);
+                    boards.get(i).put(j, null);
                 }
             }
             return boards;
@@ -44,27 +45,28 @@ public class GameService {
     }
 
     public List<Map<Integer, Character>> makeMove(Character player, Integer location)  {
-        location -= PRESET_COUNTING;
+            location -= PRESET_COUNTING;
 
-        if (boardService.getGameWinner() == null) {
-            if (player == boardService.getCurrentPlayer() &&
-                    boardsWins.get(boardService.getCurrentBoard()) == null &&
-                    boards.get(boardService.getCurrentBoard()).get(location) == null) {
-                boards.get(boardService.getCurrentBoard()).replace(location, player);
 
-                if (boardService.checkCurrentBoard(boards.get(boardService.getCurrentBoard()))) {
-                    boardsWins.set(boardService.getCurrentBoard(), player);
-                    boardService.checkAllBoards(boardsWins);
+            if (boardService.getGameWinner() == null && boardsWins.get(boardService.getCurrentBoard()) == null) {
+                if (
+                        boardService.getCurrentPlayer() == player &&
+                                boards.get(boardService.getCurrentBoard()).get(location) == null
+                ) {
+                    boards.get(boardService.getCurrentBoard()).replace(location, player);
+
+                    if (boardService.checkCurrentBoard(location, boards.get(boardService.getCurrentBoard()))) {
+                        boardsWins.set(boardService.getCurrentBoard(), player);
+                        boardService.checkAllBoards(boardsWins);
+                    }
+                    boardService.switchUser();
+                    boardService.switchBoard(location);
+                } else {
+                    throw new WrongMoveException();
                 }
-
-                boardService.switchUser();
-                boardService.switchBoard(location);
             } else {
-                throw new WrongMoveException();
+                throw new GameNotAvailableException();
             }
-        } else {
-            throw new GameNotAvailableException();
-        }
 
         return boards;
     }
